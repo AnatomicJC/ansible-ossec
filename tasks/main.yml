@@ -4,13 +4,18 @@
     name: ossec-hids-server
     state: latest
 
-- name: push ossec.conf
+- name: push configuration files
   template:
-    src: "var/ossec/etc/ossec.conf.j2"
-    dest: "/var/ossec/etc/ossec.conf"
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
     owner: ossec
     group: ossec
     mode: 0640
+  with_items:
+    - src: "var/ossec/etc/ossec.conf.j2"
+      dest: "/var/ossec/etc/ossec.conf"
+    - src: "var/ossec/rules/local_rules.xml.j2"
+      dest: "/var/ossec/rules/local_rules.xml"
 
 - name: start ossec service
   service:
