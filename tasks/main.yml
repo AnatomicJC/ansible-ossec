@@ -16,8 +16,10 @@
       dest: "/var/ossec/etc/ossec.conf"
     - src: "var/ossec/rules/local_rules.xml.j2"
       dest: "/var/ossec/rules/local_rules.xml"
+  register: ossec_conf
 
 - name: start ossec service
   service:
     name: ossec
     state: started
+  when: ossec_conf.changed
