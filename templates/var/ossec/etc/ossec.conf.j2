@@ -127,7 +127,9 @@
     <white_list>127.0.0.1</white_list>
     <white_list>::1</white_list>
     <white_list>^localhost.localdomain$</white_list>
-    <white_list>192.168.3.1</white_list>
+{% for fqdn in ossec_global_whitelist %}
+    <white_list>{{ fqdn }}</white_list>
+{% endfor %}
   </global>
 
   <alerts>

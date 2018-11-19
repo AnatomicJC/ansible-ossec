@@ -2,6 +2,7 @@
 ossec_email_from: "me@example.com"
 ossec_email_to: "you@example.com"
 ossec_smtp_server: "localhost."
+ossec_global_whitelist: []
 
 # this role depends on apt role: https://github.com/AnatomicJC/ansible-apt
 #
