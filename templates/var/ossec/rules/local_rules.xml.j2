@@ -51,23 +51,8 @@
   </rule>
   -->
 
-  <rule id="100030" level="0">
-    <if_sid>1002</if_sid>
-    <match>SMART Prefailure Attribute: 1 Raw_Read_Error_Rate changed from</match>
-    <description>Smart</description>
-  </rule>
-   
-  <rule id="100031" level="0">
-    <if_sid>1002</if_sid>
-    <match>previous self-test completed without error</match>
-    <description>Smart</description>
-  </rule>
-   
-  <rule id="100032" level="0">
-    <if_sid>510</if_sid>
-    <regex>/var/lib/docker/overlay2/\w+/merged</regex>
-    <description>Files hidden inside directory Link count does not match number of files (2,1).</description>
-  </rule>
+{{ ossec_group_local_rules }}
+{{ ossec_host_local_rules }}
    
 </group> <!-- SYSLOG,LOCAL -->
 
