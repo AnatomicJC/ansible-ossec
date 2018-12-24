@@ -10,7 +10,7 @@ ossec_host_local_rules: ""
 #
 # please add this to your inventory/group_vars/all file:
 # 
-# apt_custom_keys:
+# apt_ossec_keys:
 #   - name: ossec
 #     content: |
 #       -----BEGIN PGP PUBLIC KEY BLOCK-----
@@ -43,7 +43,9 @@ ossec_host_local_rules: ""
 #       kt1o05etg6iRaeSaNQ==
 #       =DrwN
 #       -----END PGP PUBLIC KEY BLOCK-----
-# apt_custom_sources:
+# apt_keys: "{{ apt_ossec_keys }}"
+# apt_ossec_sources:
 #   - dest: "ossec.list"
 #     content: |
 #       deb https://updates.atomicorp.com/channels/atomic/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} main
+# apt_custom_sources_list: "{{ apt_ossec_sources }}"
