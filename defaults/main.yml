@@ -5,6 +5,8 @@ ossec_smtp_server: "localhost."
 ossec_global_whitelist: []
 ossec_group_local_rules: ""
 ossec_host_local_rules: ""
+ossec_timeout_allowed: True
+ossec_timeout_value: 600
 
 # this role depends on apt role: https://github.com/AnatomicJC/ansible-apt
 #
