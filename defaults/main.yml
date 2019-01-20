@@ -45,7 +45,7 @@
 
 ossec_email_from: "me@example.com"
 ossec_email_to: "you@example.com"
-ossec_smtp_server: "localhost."
+ossec_smtp_server: "localhost"
 ossec_global_whitelist: []
 ossec_group_local_rules: ""
 ossec_host_local_rules: ""
