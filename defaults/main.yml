@@ -49,8 +49,13 @@ ossec_smtp_server: "127.0.0.1"
 ossec_global_whitelist: []
 ossec_group_local_rules: ""
 ossec_host_local_rules: ""
+# https://ossec-docs.readthedocs.io/en/latest/syntax/head_ossec_config.active-response.html
 ossec_timeout_allowed: True
+# ossec_timeout_value won't be used if ossec_timeout_allowed is False
 ossec_timeout_value: 600
+# ossec_repeated_offenders: A comma separated list of increasing timeouts in minutes for repeat offenders. There can be a maximum of 5 entries. This should be set in the ossec.conf of an agent in an agent/server setup.
+# 30,60,1440,10080,43200
+ossec_repeated_offenders: ""
 ossec_rules_list:
   - rules_config.xml
   - pam_rules.xml
