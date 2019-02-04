@@ -122,6 +122,9 @@
 {% if ossec_timeout_allowed %}
     <timeout>{{ ossec_timeout_value }}</timeout>
 {% endif %}
+{% if ossec_repeated_offenders }}
+    <repeated_offenders>{{ ossec_repeated_offenders }}</repeated_offenders>
+{% endif %}
   </active-response>
 
   <active-response>
@@ -134,6 +137,9 @@
     <level>6</level>
 {% if ossec_timeout_allowed %}
     <timeout>{{ ossec_timeout_value }}</timeout>
+{% endif %}
+{% if ossec_repeated_offenders }}
+    <repeated_offenders>{{ ossec_repeated_offenders }}</repeated_offenders>
 {% endif %}
   </active-response>  
 
