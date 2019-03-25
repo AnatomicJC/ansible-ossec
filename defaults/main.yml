@@ -44,7 +44,8 @@
 # apt_custom_sources_list: "{{ apt_ossec_sources }}"
 
 ossec_email_from: "me@example.com"
-ossec_email_to: "you@example.com"
+ossec_emails_to:
+  - "you@example.com"
 ossec_smtp_server: "127.0.0.1"
 ossec_global_whitelist: []
 ossec_group_local_rules: ""
