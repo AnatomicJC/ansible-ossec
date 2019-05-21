@@ -28,4 +28,4 @@
   service:
     name: ossec
     state: restarted
-  when: ossec_conf.changed
+  when: ossec_conf.changed|bool
