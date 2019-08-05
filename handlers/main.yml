@@ -1,2 +1,5 @@
 ---
-# handlers file for ansible-ossec
+- name: start ossec service
+  service:
+    name: ossec
+    state: restarted

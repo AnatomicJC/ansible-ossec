@@ -13,7 +13,7 @@
   when: (ansible_distribution == "Debian") and (ansible_distribution_release == "stretch")
 
 - name: STRETCH BROKEN PACKAGE - Push ossec-hids-server package
-  copy: 
+  copy:
     src: ossec-hids-server_3.3.0.7682stretch_amd64.deb
     dest: /tmp/ossec-hids-server_3.3.0.7682stretch_amd64.deb
     owner: root
@@ -51,10 +51,7 @@
       dest: "/var/ossec/etc/decoder.xml"
     - src: "var/ossec/rules/local_rules.xml.j2"
       dest: "/var/ossec/rules/local_rules.xml"
-  register: ossec_conf
+  notify:
+    - start ossec service
 
-- name: start ossec service
-  service:
-    name: ossec
-    state: restarted
-  when: ossec_conf.changed|bool
+- meta: flush_handlers
