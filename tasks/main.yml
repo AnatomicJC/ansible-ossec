@@ -3,6 +3,28 @@
   include_vars: "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
   when: (ansible_distribution == "Debian") and (ansible_distribution_release == "wheezy")
 
+- name: STRETCH BROKEN PACKAGE - Push missing dependencies
+  copy:
+    src: "{{ item }}"
+    dest: "/tmp/{{ item }}"
+    owner: root
+    group: root
+    mode: '0644'
+  when: (ansible_distribution == "Debian") and (ansible_distribution_release == "stretch")
+    or (ansible_distribution_release == "buster")
+  with_items:
+    - libmariadb2_2.3.2-2_amd64.deb
+    - libssl1.0.2_1.0.2s-1~deb9u1_amd64.deb
+
+- name: STRETCH BROKEN PACKAGE - Install missing dependencies
+  apt:
+    deb: "/tmp/{{ item }}"
+  when: (ansible_distribution == "Debian") and (ansible_distribution_release == "stretch")
+    or (ansible_distribution_release == "buster")
+  with_items:
+    - libmariadb2_2.3.2-2_amd64.deb
+    - libssl1.0.2_1.0.2s-1~deb9u1_amd64.deb
+
 - name: STRETCH BROKEN PACKAGE - Install dependencies
   apt:
     name:
@@ -11,6 +33,7 @@
       - expect
     state: present
   when: (ansible_distribution == "Debian") and (ansible_distribution_release == "stretch")
+    or (ansible_distribution_release == "buster")
 
 - name: STRETCH BROKEN PACKAGE - Push ossec-hids-server package
   copy:
@@ -20,17 +43,24 @@
     group: root
     mode: '0644'
   when: (ansible_distribution == "Debian") and (ansible_distribution_release == "stretch")
+    or (ansible_distribution_release == "buster")
 
 - name: STRETCH BROKEN PACKAGE - Install ossec-hids-server package
   apt:
     deb: /tmp/ossec-hids-server_3.3.0.7682stretch_amd64.deb
   when: (ansible_distribution == "Debian") and (ansible_distribution_release == "stretch")
+    or (ansible_distribution_release == "buster")
 
 - name: STRETCH BROKEN PACKAGE - Delete tmp debian package
   file:
-    path: /tmp/ossec-hids-server_3.3.0.7682stretch_amd64.deb
+    path: "/tmp/{{ item }}"
     state: absent
   when: (ansible_distribution == "Debian") and (ansible_distribution_release == "stretch")
+    or (ansible_distribution_release == "buster")
+  with_items:
+    - ossec-hids-server_3.3.0.7682stretch_amd64.deb
+    - libmariadb2_2.3.2-2_amd64.deb
+    - libssl1.0.2_1.0.2s-1~deb9u1_amd64.deb
 
 - name: Install ossec package
   apt:
