@@ -60,11 +60,25 @@
   with_items:
     - src: "var/ossec/etc/ossec.conf.j2"
       dest: "/var/ossec/etc/ossec.conf"
-    - src: "var/ossec/etc/decoder.xml.j2"
-      dest: "/var/ossec/etc/decoder.xml"
     - src: "var/ossec/rules/local_rules.xml.j2"
       dest: "/var/ossec/rules/local_rules.xml"
   notify:
     - start ossec service
+
+- name: push ssh active-response fix
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: ossec
+    group: ossec
+    mode: 0640
+  with_items:
+    - src: "var/ossec/etc/decoder.xml.j2"
+      dest: "/var/ossec/etc/decoder.xml"
+  notify:
+    - start ossec service
+  when:
+    - ansible_distribution == 'Debian'
+    - ansible_distribution_major_version|int < 10
 
 - meta: flush_handlers
